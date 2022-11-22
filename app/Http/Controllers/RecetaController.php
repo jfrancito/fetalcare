@@ -271,12 +271,12 @@ class RecetaController extends Controller
 	{
 
 		View::share('titulo','Detalle de Receta');
-		$centro 			=	'H.II LUIS HEYSEN';
-		$local 				=	'LAMBAYEQUE';
-		$farmacia 			=	'FARMACIA EMERGENCIA';
-		$area 				=	'EMER';
-		$especialidad 		=	'GINECOL. Y OBSTETR.';
-		$datosempresa 		=	'km 3.5 Carr. Pimentel-Chiclayo Telf. 7420835-2007';
+		$centro 			=	'RB SERVICIOS MÉDICOS ( FETALCARE - FEMICONTROL)';
+		$local 				=	'CHICLAYO';
+		$farmacia 			=	'';
+		$area 				=	'Consulta externa';
+		$especialidad 		=	'Ginecología y Obstetricia';
+		$datosempresa 		=	'Av Luis Gonzáles 440 oficina 602';
 
 		$idcontrol 			= 	$this->funciones->decodificarmaestra($idcontrol);
 		$funcion 			= 	$this;
