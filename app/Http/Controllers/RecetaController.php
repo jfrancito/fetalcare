@@ -17,6 +17,7 @@ use App\Modelos\DetalleControl;
 use App\Modelos\Receta;
 use App\Modelos\DetalleReceta;
 use App\Modelos\Medicamento;
+use App\User;
 
 
 
@@ -119,7 +120,7 @@ class RecetaController extends Controller
 		$listamedicamentos 		= 	DetalleReceta::whereIn('receta_id',$idrecetas)
 									->where('activo','=','1')
 									->get();
-
+		// dd($listamedicamentos);
 		return View::make('atenderpaciente/ajax/alistamedicamentosreceta',
 						 [				 	
 						 	'listamedicamentos' 	=> $listamedicamentos,
@@ -152,7 +153,7 @@ class RecetaController extends Controller
 			$cantidad=0;
 		}
 
-		$receta 				=	Receta::where('id','=',$receta_id)->first();
+		$receta 				=	Receta::where('diagnostico_id','=',$receta_id)->first();
 		$detallecontrol 		=	DetalleControl::where('id','=',$receta->diagnostico_id)->first(); //una receta
 		$control_id 			=	$detallecontrol->control_id;
 
@@ -270,11 +271,20 @@ class RecetaController extends Controller
 	{
 
 		View::share('titulo','Detalle de Receta');
+		$centro 			=	'H.II LUIS HEYSEN';
+		$local 				=	'LAMBAYEQUE';
+		$farmacia 			=	'FARMACIA EMERGENCIA';
+		$area 				=	'EMER';
+		$especialidad 		=	'GINECOL. Y OBSTETR.';
+		$datosempresa 		=	'km 3.5 Carr. Pimentel-Chiclayo Telf. 7420835-2007';
 
 		$idcontrol 			= 	$this->funciones->decodificarmaestra($idcontrol);
 		$funcion 			= 	$this;
 
 		$control 			= 	Control::where('id','=',$idcontrol)->first();
+		$medico 			=	User::where('id','=',$control->doctor_id)->first();
+		$usuario 			=	User::where('id','=',Session::get('usuario')->id)->first();
+
 		$listacontroles 	= 	Control::where('paciente_id','=',$control->paciente_id)
 									->orderby('fecha','desc')->get();
 
@@ -309,16 +319,24 @@ class RecetaController extends Controller
 									->orderBy('R.diagnostico_id','asc')
 									->get();
 
-		$pdf 				= 	PDF::loadView('atenderpaciente.pdf.detallerecetacontrol', 
+		$pdf 				= 	PDF::loadView('atenderpaciente.pdf.formatoreceta', 
 									[
-								 	'funcion' 				=> $funcion,
-								 	'listacontroles' 		=> $listacontroles,
-								 	'listadetallecie' 		=> $listadetallecie,	
-								 	'control' 				=> $control,
-								 	'paciente' 				=> $paciente,
-								 	'edad' 					=> $edad,								
-								 	'listarecetas'			=> $listarecetas,
-								 	'listamedicamentos'		=> $listamedicamentos,
+								 	'funcion' 				=> 	$funcion,
+								 	'listacontroles' 		=> 	$listacontroles,
+								 	'listadetallecie' 		=> 	$listadetallecie,	
+								 	'control' 				=> 	$control,
+								 	'paciente' 				=> 	$paciente,
+								 	'edad' 					=> 	$edad,								
+								 	'listarecetas'			=> 	$listarecetas,
+								 	'listamedicamentos'		=> 	$listamedicamentos,
+								 	'medico'				=>	$medico,
+								 	'usuario'				=>	$usuario,
+								 	'centro' 				=>	$centro,
+									'local' 				=>	$local,
+									'farmacia' 				=>	$farmacia,
+									'area' 					=>	$area,
+									'especialidad' 			=>	$especialidad,
+									'datosempresa'			=>	$datosempresa,
 									]);
 
 		return $pdf->stream($titulo.'.pdf');
