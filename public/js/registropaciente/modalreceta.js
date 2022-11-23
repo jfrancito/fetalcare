@@ -45,7 +45,7 @@ $(document).ready(function(){
             peso=0;
         }
         if(peso>0){
-            imc = peso/(talla^2);
+            imc = peso/(talla*talla);
         }
         return imc.toFixed(3);
     }
