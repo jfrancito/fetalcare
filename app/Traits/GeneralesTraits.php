@@ -202,5 +202,17 @@ trait GeneralesTraits
 		return  $combo;	
 	}
 
-
+	private function gn_generacion_combo_examenes($titulo,$todo='')
+	{
+		$array 						= 	DB::table('examenes')->where('activo','=',1)
+		        						->pluck('descripcion','id')
+										->toArray();
+		if($todo=='TODO'){
+			$combo  				= 	array('' => $titulo , $todo => $todo) + $array;
+		}else{
+			$combo  				= 	array('' => $titulo) + $array;
+		}
+	 	return  $combo;	
+	}
+	
 }

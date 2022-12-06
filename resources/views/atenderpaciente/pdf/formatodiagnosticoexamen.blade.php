@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+	<title>Control ({{$control->fecha_control}}) </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="icon" type="image/x-icon" href="{{ asset('public/favicon.ico') }}"> 
+
+<style type="text/css">
+	
+
 .izquierda{
 	text-align: right;
 }
@@ -274,3 +286,29 @@ td .sinbordes_centro {
     border: 0px;
     text-align: center;
 }
+
+
+
+</style>
+
+</head>
+
+<body>
+
+	<div class="row">
+		<div style="width: 100%;position: static;">
+			<table width="100%" >
+				<tr>
+					<td width="100%" style="border: 2px solid;" class="contenedorreceta"> 
+                   		@include('atenderpaciente.pdf.detalleformatodiagnosticoexamen')
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+    
+
+</body>
+</html>

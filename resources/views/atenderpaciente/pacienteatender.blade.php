@@ -107,5 +107,6 @@
   </script>
   <script src="{{ asset('public/js/registropaciente/registropaciente.js?v='.$version) }}" type="text/javascript"></script>
   <script src="{{ asset('public/js/registropaciente/modalreceta.js?v='.$version) }}" type="text/javascript"></script>
+  <script src="{{ asset('public/js/registropaciente/modalexamen.js?v='.$version) }}" type="text/javascript"></script>
 
 @stop

@@ -267,29 +267,6 @@
 
 
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-    <div class="form-group" style="padding-top: 0px;">
-    <label class="col-sm-12 control-label" style="text-align: left;"><b>PLAN DE TRABAJO :</b> </label>
-    <div class="col-sm-12">
-
-        <textarea 
-        name="plan_trabajo"
-        id = "plan_trabajo"
-        
-        class="form-control input-sm"
-        rows="5" 
-        cols="50"
-        data-aw="7">{{$control->plan_trabajo}}</textarea>
-
-        @include('error.erroresvalidate', [ 'id' => $errors->has('plan_trabajo')  , 
-                                            'error' => $errors->first('plan_trabajo', ':message') , 
-                                            'data' => '7'])
-
-    </div>
-    </div>
-
-</div>
 
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -315,6 +292,29 @@
 
 <input type="hidden" name="control_id" id= 'control_id' value = '{{$control->id}}'>
 
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="form-group" style="padding-top: 0px;">
+    <label class="col-sm-12 control-label" style="text-align: left;"><b>PLAN DE TRABAJO :</b> </label>
+    <div class="col-sm-12">
+
+        <textarea 
+        name="plan_trabajo"
+        id = "plan_trabajo"
+        
+        class="form-control input-sm"
+        rows="5" 
+        cols="50"
+        data-aw="7">{{$control->plan_trabajo}}</textarea>
+
+        @include('error.erroresvalidate', [ 'id' => $errors->has('plan_trabajo')  , 
+                                            'error' => $errors->first('plan_trabajo', ':message') , 
+                                            'data' => '7'])
+
+    </div>
+    </div>
+
+</div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
     <div class="form-group" style="padding-top: 0px;">
@@ -347,6 +347,21 @@
   </div>
   <div class="col-xs-12">
     <p class="text-right">
+
+        <a  target="_blank" 
+            href="{{ url('/pdf-diagnostico-examen/'.Hashids::encode(substr($control->id, -8)) )  }}"
+                  >
+            <button 
+                type="button" 
+                class="btn btn-space btn-success btn-lg btnimprimirdiagnosticoexamen" 
+                id='btnimprimirdiagnosticoexamen' 
+            >
+              <i class="icon icon-left mdi mdi mdi-print">  
+              </i> 
+              Imprimir Examenes
+            </button>
+        </a>
+
         <a  target="_blank" 
                   href="{{ url('/pdf-receta-control/'.Hashids::encode(substr($control->id, -8)) )  }}"
                         >

@@ -8,50 +8,56 @@
 @stop
 @section('section')
 
-  <div class="be-content contenido atenderpaciente">
+  <div class="be-content contenido buscarpacientetop">
     <div class="main-content container-fluid">
           <div class="row">
 
+
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="panel panel-default panel-border-color panel-border-color-success">
-                <div class="panel-heading">Lista Paciente por atender
+                <div class="panel-heading">Buscar Examen
                   <div class="tools tooltiptop">
-                    <a href="#" class="tooltipcss opciones buscarlistaatender">
-                      <span class="tooltiptext">Buscar lista paciente por atender atender</span>
+                    <a href="#" class="tooltipcss opciones buscarpaciente">
+                      <span class="tooltiptext">Buscar Examen</span>
                       <span class="icon mdi mdi-search"></span>
-                                            <input type="hidden" name="idopcion" id='idopcion' value='{{$idopcion}}'>
                     </a>
                   </div>
                 </div>
                 <div class="panel-body">
                   <div class='filtrotabla row'>
-                    <div class="col-xs-3">
+                    <div class="col-xs-12">
 
-                      <div class="form-group ">
-                        <label class="col-sm-12 control-label labelleft" >Fecha :</label>
-                        <div class="col-sm-12 abajocaja" >
-                          <div data-min-view="2" 
-                                 data-date-format="dd-mm-yyyy"  
-                                 class="input-group date datetimepicker pickerfecha" style = 'padding: 0px 0;margin-top: -3px;'>
-                                 <input size="16" type="text" 
-                                        value="{{$fin}}" 
-                                        placeholder="Fecha"
-                                        id='fecha' 
-                                        name='fecha' 
+
+                      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cajareporte">
+
+                          <div class="form-group">
+                            <label class="col-sm-12 control-label labelleft" >Codigo :</label>
+                            <div class="col-sm-12 abajocaja">
+
+                                <input  type="text"
+                                        id="codigo_b" name='codigo_b' 
+                                        placeholder="CODIGO"
                                         required = ""
-                                        class="form-control input-sm"/>
-                                  <span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-calendar"></i></span>
+                                        autocomplete="off" class="form-control input-sm" data-aw="1"/>
+
+                                @include('error.erroresvalidate', [ 'id' => $errors->has('codigo_b')  , 
+                                                                    'error' => $errors->first('codigo_b', ':message') , 
+                                                                    'data' => '1'])
+
                             </div>
-                        </div>
+                          </div>
+
                       </div>
+
+                      <input type="hidden" name="idopcion" id='idopcion' value='{{$idopcion}}'>
 
                     </div>
                   </div>
+
                   <div class='listajax'>
-
-                    @include('atenderpaciente.ajax.alistaatenderpaciente')
-
+                    @include('examenes.ajax.alistabuscarregistro')
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -111,7 +117,6 @@
 
   </script>
   <script src="{{ asset('public/js/registropaciente/registropaciente.js?v='.$version) }}" type="text/javascript"></script>
-  <script src="{{ asset('public/js/registropaciente/modalreceta.js?v='.$version) }}" type="text/javascript"></script>
   <script src="{{ asset('public/js/registropaciente/modalexamen.js?v='.$version) }}" type="text/javascript"></script>
 
 @stop

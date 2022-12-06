@@ -285,30 +285,6 @@ enctype="multipart/form-data"
 
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-		<div class="form-group" style="padding-top: 0px;">
-		<label class="col-sm-12 control-label" style="text-align: left;"><b>PLAN DE TRABAJO :</b> </label>
-		<div class="col-sm-12">
-
-				<textarea 
-				name="plan_trabajo"
-				id = "plan_trabajo"
-				
-				class="form-control input-sm"
-				rows="5" 
-				cols="50"
-				data-aw="7">{{$control->plan_trabajo}}</textarea>
-
-				@include('error.erroresvalidate', [ 'id' => $errors->has('plan_trabajo')  , 
-																						'error' => $errors->first('plan_trabajo', ':message') , 
-																						'data' => '7'])
-
-		</div>
-		</div>
-
-</div>
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="form-group" style="padding-top: 0px;">
 		<label class="col-sm-12 control-label" style="text-align: left;"><b> DIAGNOSTICO :</b></label>
 		</div>
@@ -339,6 +315,30 @@ enctype="multipart/form-data"
 	<div class='listajax_detalle'>
 		@include('atenderpaciente.ajax.alistadiagnostico')
 	</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+		<div class="form-group" style="padding-top: 0px;">
+		<label class="col-sm-12 control-label" style="text-align: left;"><b>PLAN DE TRABAJO :</b> </label>
+		<div class="col-sm-12">
+
+				<textarea 
+				name="plan_trabajo"
+				id = "plan_trabajo"
+				
+				class="form-control input-sm"
+				rows="5" 
+				cols="50"
+				data-aw="7">{{$control->plan_trabajo}}</textarea>
+
+				@include('error.erroresvalidate', [ 'id' => $errors->has('plan_trabajo')  , 
+																						'error' => $errors->first('plan_trabajo', ':message') , 
+																						'data' => '7'])
+
+		</div>
+		</div>
+
 </div>
 
 <input type="hidden" name="control_id" id= 'control_id' value = '{{$control->id}}'>
@@ -375,6 +375,18 @@ enctype="multipart/form-data"
 	<div class="col-xs-12">
 		<p class="text-right">
 			<button 
+				class="btn btn-space btn-success btn-lg agregarexamen"
+				type="button" href="#" 
+				data-toggle="modal"
+				data-target="#modalagregarexamen" 
+				id='agregarexamen'
+				>
+				<i class="icon icon-left mdi mdi-eyedropper">	
+				</i> 
+				Examenes
+			</button>
+	
+			<button 
 				class="btn btn-space btn-primary btn-lg agregarreceta"
 				type="button" href="#" 
 				data-toggle="modal"
@@ -393,7 +405,7 @@ enctype="multipart/form-data"
 
 
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display: none;">
 
 		<div class="form-group" style="padding-top: 0px;">
 		<label class="col-sm-12 control-label" style="text-align: left;"><b>RESULTADO : </b></label>
@@ -472,6 +484,7 @@ enctype="multipart/form-data"
 
 
 @include('atenderpaciente.modal.magregarreceta')
+@include('atenderpaciente.modal.magregarexamen')
 
 @if(isset($ajax))
 	<script type="text/javascript">

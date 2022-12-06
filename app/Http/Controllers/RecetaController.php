@@ -87,8 +87,9 @@ class RecetaController extends Controller
 									->join('recetas as RC','DC.id','=','RC.diagnostico_id')
 									->where('DC.control_id','=',$control_id)
 									->where('DC.tipo','=','CIE')->where('DC.activo','=','1')
-									->pluck('DC.descripcion','RC.id')
+									->pluck('DC.descripcion','RC.diagnostico_id')
 									->toArray();
+									
 		$combodiagnostico 		=	array(''=>'SELECCIONE DIAGNOSTICO');
 		if(count($array)>0){
 			$combodiagnostico 		=	array(''=>'SELECCIONE DIAGNOSTICO')+$array;			

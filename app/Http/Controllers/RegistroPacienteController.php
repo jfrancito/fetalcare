@@ -17,6 +17,8 @@ use App\Modelos\DetalleControl;
 use App\Modelos\Receta;
 use App\Modelos\DetalleReceta;
 use App\Modelos\Medicamento;
+use App\Modelos\DiagnosticoExamen;
+
 
 
 
@@ -451,8 +453,10 @@ class RegistroPacienteController extends Controller
 			$listadetalledoc 		= 	DetalleControl::where('control_id','=',$control->id)
 										->where('tipo','=','DOC')->where('activo','=','1')->get();
 
+
 			// $listadetallerec 		=	Receta::where('control_id','=',$control->id)->where('activo','=',1)->get();
 			$combo_medicamentos 		=	$this->gn_generacion_combo_medicamentos('SELECCIONE MEDICAMENTO');	
+			$combo_examenes 		=	$this->gn_generacion_combo_examenes('SELECCIONE EXAMEN');	
 			$combo_dosificacion 		=	$this->gn_generacion_combo_dosificacion('SELECCIONE DOSIFICACION');	
 			$listadetallerec 		=	$listadetalledoc;
 			$comboestado  			= 	array('1' => 'ACTIVO', '0' => 'ELIMINAR');
@@ -470,6 +474,7 @@ class RegistroPacienteController extends Controller
 							 	'paciente' 				=> $paciente,
 							 	'comboestado' 			=> $comboestado,
 							 	'combo_medicamentos'	=> $combo_medicamentos,
+							 	'combo_examenes'	=> $combo_examenes,
 							 	'combo_dosificacion'	=> $combo_dosificacion,
 							 	'edad' 					=> $edad,			 	
 							 ]);
@@ -545,6 +550,18 @@ class RegistroPacienteController extends Controller
 		$receta->fecha_crea 	= 	$this->fechaactual;
 		$receta->usuario_crea 	= 	Session::get('usuario')->id;
 		$receta->save();
+		////////////////////////////////////////////////////////////////////////
+		$DiagExamen 				= 	new DiagnosticoExamen;
+		$idDiagExamen 				= 	$this->funciones->getCreateIdMaestra('diagnosticoexamen');
+		$DiagExamen->id 			= 	$idDiagExamen;
+		$DiagExamen->diagnostico_id =   $idcontrol;
+		$DiagExamen->doctor_id 		=   $cabecera->doctor_id;
+		$DiagExamen->paciente_id 	=   $cabecera->paciente_id;
+		$DiagExamen->fecha 			= 	date('Y-m-d',strtotime($this->fechaactual));
+		$DiagExamen->descripcion 	= 	strtoupper($codigocie).'-'.strtoupper($descripcion);
+		$DiagExamen->fecha_crea 	= 	$this->fechaactual;
+		$DiagExamen->usuario_crea 	= 	Session::get('usuario')->id;
+		$DiagExamen->save();
 		////////////////////////////////////////////////////////////////////////
 		$listadetallecie 		= 	DetalleControl::where('control_id','=',$control_id)
 									->where('tipo','=','CIE')->where('activo','=','1')->get();

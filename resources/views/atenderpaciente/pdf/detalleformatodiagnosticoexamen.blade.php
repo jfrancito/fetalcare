@@ -73,31 +73,19 @@
 	      <tr>
 	        <th>NRO</th>
 	        <th>CODIGO</th>
-	        <th>DENOMINACION</th>
-	        <th>DIAS</th>
-	        <th>UM</th>
-	        <th>CANT.</th>
+	        <th>EXAMEN</th>
 	        <th>DIAGNOSTICO</th>
 	      </tr>
 	    </thead>
 
 	    <tbody>                              
-	    @foreach($listamedicamentos as $index => $item)
+	    @foreach($listadiagnosticosexamenes as $index => $item)
 	        <tr>
 	          	<td><strong>	 {{$index+1}}</strong></td>
-	          	<td> {{$item->medicamento->codigo}}</td>
-	          	<td> {{$item->medicamento->descripcion}}</td>
-	          	<td> {{$item->dias}}</td>
-	          	<td> {{$item->medicamento->unidad}}</td>
-	          	<td> {{$item->cantidad}}</td>
-	          	<td> {{$item->receta->diagnostico->descripcion}}</td>
-	        </tr>  
-	        <tr>
-	        	<td colspan="7">
-	        		<b>Ind.</b> {{ $item->indicacion }}
-	          		<b>Dosific.</b> {{$item->dosificaciondetalle()}}
-	        	</td>
-	        </tr>                
+	          	<td> {{$item->examen->codigo}}</td>
+	          	<td> {{$item->examen->descripcion}}</td>
+	          	<td> {{$item->diagnosticoexamen->diagnostico->descripcion}}</td>
+	        </tr>        
 	    @endforeach
 	    </tbody>
 	  </table>
