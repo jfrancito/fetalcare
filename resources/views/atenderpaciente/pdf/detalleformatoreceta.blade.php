@@ -113,7 +113,7 @@
 				<td class="sinbordes">
 					<div class="firma_asegurado linea_izq">
 						<span>
-							FIRMA DEL ASEGURADO	
+							FIRMA DEL PACIENTE	
 						</span>
 					</div>
 				</td>

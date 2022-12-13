@@ -180,7 +180,7 @@ class GestionDiagnosticoExamenesController extends Controller
 		View::share('titulo','Detalle de Examenes');
 		$centro 				=	'LAMBAYEQUE';
 		$local 					=	'CHICLAYO';
-		$farmacia 				=	'FARMACIA EMERGENCIA';
+		$farmacia 				=	'';
 		$area 					=	'CONSULTA EXTERNA';
 		$especialidad 			=	'Ginecología y Obstetricia';
 		$datosempresa 			=	'Av Luis Gonzáles 440 oficina 602';
