@@ -169,27 +169,43 @@ $(document).ready(function(){
 
     });
 
+
+    function validarDiagnostico(diagnostico)
+    {
+        debugger;
+        var swguardar =false;
+        var countcarrito=0;
+        $("#tabladiagnostico tr").each(function(){
+            var codigocie = $(this).find('.codigocie_ls').html();
+            if(codigocie==diagnostico){
+                 swguardar=true;
+            }
+            countcarrito = countcarrito + 1;
+        });
+        return swguardar;
+    }
+
     $(".atenderpaciente").on('click','.asignarcie', function() {
-
+        debugger;
         event.preventDefault();
-        var codigocie       =   $('#codigocie').val();
-        var descripcion     =   $('#descripcion').val();
+        var cie_id          =   $('#cie_id').val();
         var control_id      =   $('#control_id').val();
-
+        var combo_cie_text  =   $('#cie_id').find('option:selected').text();
+        var array_cie       =   combo_cie_text.split(" - ");
+        var diagnostico     =   array_cie[0];
         var _token          =   $('#token').val();
-        //validacioones
-        if(descripcion ==''){ alerterrorajax("Ingrese un diagnostico."); return false;}
-
+        
+        if(cie_id ==''){ alerterrorajax("Seleccione un Diagnostico."); return false;}
+        if(validarDiagnostico(diagnostico)){alerterrorajax("Diagnostico "+ diagnostico + " ya Registrado."); return false;}
         data            =   {
                                 _token      : _token,
-                                codigocie   : codigocie,
-                                descripcion : descripcion,
-                                control_id : control_id,
+                                cie_id      : cie_id,
+                                control_id  : control_id,
                             };
         ajax_normal_section(data,"/ajax-asignar-cie-control",'listajax_detalle');
 
-        $('#descripcion').val('');
-        $('#codigocie').val('');
+        $("#cie_id").val($("#cie_id option:first").val());
+        $("#cie_id").change();
 
     });
 

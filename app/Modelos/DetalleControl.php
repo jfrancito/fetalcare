@@ -19,5 +19,10 @@ class DetalleControl extends Model
         return $this->hasOne('App\Modelos\Receta', 'id','diagnostico_id');
     }
 
+
+    public function cie()
+    {
+        return $this->hasOne('App\Modelos\Cie', 'id','cie_id');
+    }
 }
 

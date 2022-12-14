@@ -214,5 +214,20 @@ trait GeneralesTraits
 		}
 	 	return  $combo;	
 	}
+
+	private function gn_generacion_combo_cies($titulo,$todo='')
+	{
+		$array 						= 	DB::table('cies')->where('activo','=',1)
+		        						->selectRaw("concat(codigo,' - ',descripcion) as descripcion,id")
+		        						->pluck('descripcion','id')
+										->toArray();
+		if($todo=='TODO'){
+			$combo  				= 	array('' => $titulo , $todo => $todo) + $array;
+		}else{
+			$combo  				= 	array('' => $titulo) + $array;
+		}
+	 	return  $combo;	
+	}
+
 	
 }

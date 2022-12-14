@@ -207,7 +207,7 @@ enctype="multipart/form-data"
 									value="{{number_format($control->talla,2)}}"
 									placeholder="TALLA EN METROS"
 									data-parsley-maxlength="6"
-									autocomplete="off" class="form-control input-sm validarnumero" data-aw="5"/>
+									autocomplete="off" class="form-control input-sm validarnumero" data-aw="6"/>
 
 					@include('error.erroresvalidate', [ 'id' => $errors->has('talla')  , 
 																							'error' => $errors->first('talla', ':message') , 
@@ -228,7 +228,7 @@ enctype="multipart/form-data"
 									value="{{$control->peso}}"
 									placeholder="PESO EN KG"
 									
-									autocomplete="off" class="form-control input-sm validarnumero" data-aw="5"/>
+									autocomplete="off" class="form-control input-sm validarnumero" data-aw="7"/>
 
 					@include('error.erroresvalidate', [ 'id' => $errors->has('peso')  , 
 																							'error' => $errors->first('peso', ':message') , 
@@ -249,7 +249,7 @@ enctype="multipart/form-data"
 									id="imc" name='imc' 
 									value="{{$control->imc}}"
 									placeholder="IMC"
-									autocomplete="off" class="form-control input-sm noeditable" data-aw="5"/>
+									autocomplete="off" class="form-control input-sm noeditable" data-aw="8"/>
 
 					@include('error.erroresvalidate', [ 'id' => $errors->has('imc')  , 
 																							'error' => $errors->first('imc', ':message') , 
@@ -290,7 +290,7 @@ enctype="multipart/form-data"
 		</div>
 </div>
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+{{-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<div class="input-group input-group-sm">
 				<span class="input-group-addon">CIE 10</span>
 				<input  type="text"
@@ -310,7 +310,36 @@ enctype="multipart/form-data"
 				<span class="input-group-btn"><button type="button" class="btn btn-primary asignarcie">Asignar</button></span>
 
 	</div>
+</div> --}}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div class="input-group input-group-sm">
+		<div class="form-group" style="padding-top: 11px;" >
+
+			<div class="col-sm-12">
+				{!! Form::select( 'cie_id'
+				, $combo_cies,''
+				,[
+					'class'       => 'select2 form-control control input-xs' ,
+					'id'          => 'cie_id',
+					'required'    => '',
+					'data-aw'     => '12'
+				]) !!}
+
+
+
+			</div>
+		</div>
+
+		<span class="input-group-btn"><button type="button" class="btn btn-primary asignarcie">Asignar</button></span>
+
+	</div>
+	
+
 </div>
+
+
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<div class='listajax_detalle'>
 		@include('atenderpaciente.ajax.alistadiagnostico')

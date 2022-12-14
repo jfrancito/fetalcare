@@ -18,7 +18,7 @@ use App\Modelos\Receta;
 use App\Modelos\DetalleReceta;
 use App\Modelos\Medicamento;
 use App\Modelos\DiagnosticoExamen;
-
+use App\Modelos\Cie;
 
 
 
@@ -455,9 +455,10 @@ class RegistroPacienteController extends Controller
 
 
 			// $listadetallerec 		=	Receta::where('control_id','=',$control->id)->where('activo','=',1)->get();
-			$combo_medicamentos 		=	$this->gn_generacion_combo_medicamentos('SELECCIONE MEDICAMENTO');	
+			$combo_medicamentos 	=	$this->gn_generacion_combo_medicamentos('SELECCIONE MEDICAMENTO');	
 			$combo_examenes 		=	$this->gn_generacion_combo_examenes('SELECCIONE EXAMEN');	
-			$combo_dosificacion 		=	$this->gn_generacion_combo_dosificacion('SELECCIONE DOSIFICACION');	
+			$combo_cies 			=	$this->gn_generacion_combo_cies('SELECCIONE DIAGNOSTICO');	
+			$combo_dosificacion 	=	$this->gn_generacion_combo_dosificacion('SELECCIONE DOSIFICACION');	
 			$listadetallerec 		=	$listadetalledoc;
 			$comboestado  			= 	array('1' => 'ACTIVO', '0' => 'ELIMINAR');
 
@@ -474,7 +475,8 @@ class RegistroPacienteController extends Controller
 							 	'paciente' 				=> $paciente,
 							 	'comboestado' 			=> $comboestado,
 							 	'combo_medicamentos'	=> $combo_medicamentos,
-							 	'combo_examenes'	=> $combo_examenes,
+							 	'combo_examenes'		=> $combo_examenes,
+							 	'combo_cies'			=> $combo_cies,
 							 	'combo_dosificacion'	=> $combo_dosificacion,
 							 	'edad' 					=> $edad,			 	
 							 ]);
@@ -521,9 +523,14 @@ class RegistroPacienteController extends Controller
 
 	public function actionAjaxAsignarCieControl(Request $request) {
 
-		$codigocie 				= 	$request['codigocie'];
-		$descripcion 			= 	$request['descripcion'];
+		// $codigocie 				= 	$request['codigocie'];
+		// $descripcion 			= 	$request['descripcion'];
+		$cie_id 				=	$request['cie_id'];
 		$control_id 			= 	$request['control_id'];
+
+		$cie  					=	Cie::where('id','=',$cie_id)->first();
+		$codigocie 				=	$cie->codigo;
+		$descripcion 			=	$cie->descripcion;
 
 		////////////////////////////////////////////////////////////////////////
 		$cabecera 				=	Control::where('id','=',$control_id)->first();
@@ -534,6 +541,7 @@ class RegistroPacienteController extends Controller
 		$control->control_id 	= $control_id;
 		$control->codigocie 	= strtoupper($codigocie);
 		$control->descripcion 	= strtoupper($descripcion);
+		$control->cie_id 		= $cie_id;
 		$control->tipo 			= 'CIE';
 		$control->fecha_crea 	= $this->fechaactual;
 		$control->usuario_crea 	= Session::get('usuario')->id;
