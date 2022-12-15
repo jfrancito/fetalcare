@@ -322,7 +322,6 @@ enctype="multipart/form-data"
 				,[
 					'class'       => 'select2 form-control control input-xs' ,
 					'id'          => 'cie_id',
-					'required'    => '',
 					'data-aw'     => '12'
 				]) !!}
 
